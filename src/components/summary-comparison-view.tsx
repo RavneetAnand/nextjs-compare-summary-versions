@@ -23,7 +23,7 @@ export function SummaryComparisonView({
                         <CardTitle>Summary Version 1</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
-                        <ScrollArea className="h-[calc(100vh-320px)]">
+                        <ScrollArea className="h-[calc(100vh-310px)]">
                             <div className="p-4">
                                 <MarkdownRenderer content={meeting.summary1} />
                             </div>
@@ -35,7 +35,7 @@ export function SummaryComparisonView({
                         <CardTitle>Summary Version 2</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
-                        <ScrollArea className="h-[calc(100vh-320px)]">
+                        <ScrollArea className="h-[calc(100vh-310px)]">
                             <div className="p-4">
                                 <MarkdownRenderer content={meeting.summary2} />
                             </div>
@@ -46,7 +46,7 @@ export function SummaryComparisonView({
 
             <div className="flex justify-center">
                 <Button onClick={onEvaluate} size="lg">
-                    Evaluate Summaries
+                    Go to Compare
                 </Button>
             </div>
         </div>

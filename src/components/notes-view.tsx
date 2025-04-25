@@ -9,12 +9,12 @@ interface NotesViewProps {
 
 export function NotesView({ meeting }: NotesViewProps) {
     return (
-        <Card className="h-full">
+        <Card className="h-[calc(100%-10px)]">
             <CardHeader>
                 <CardTitle>Meeting Notes</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-                <ScrollArea className="h-[calc(100vh-220px)]">
+                <ScrollArea className="h-[calc(100vh-250px)]">
                     <div className="p-4">
                         <MarkdownRenderer content={meeting.notes} />
                     </div>
