@@ -46,7 +46,7 @@ export function SummaryComparisonView({
 
             <div className="flex justify-center">
                 <Button onClick={onEvaluate} size="lg">
-                    Go to Compare
+                    Go to Evaluation
                 </Button>
             </div>
         </div>

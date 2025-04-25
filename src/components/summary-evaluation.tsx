@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -22,11 +22,9 @@ interface SummaryEvaluationProps {
 }
 
 interface EvaluationResult {
-    criteria: {
-        [key: string]: {
-            better: string;
-            reasoning: string;
-        };
+    [key: string]: {
+        better: string;
+        reasoning: string;
     };
     overall: {
         better: string;
@@ -44,6 +42,16 @@ export default function SummaryEvaluation({
     const [evaluationResult, setEvaluationResult] =
         useState<EvaluationResult | null>(null);
     const [error, setError] = useState<string | null>(null);
+
+    // Clear previous evaluation result when parameters change
+    const clearEvaluationResult = () => {
+        setEvaluationResult(null);
+        setError(null);
+    };
+
+    useEffect(() => {
+        clearEvaluationResult();
+    }, [summary1, summary2, transcript, notes]);
 
     const evaluateSummaries = async () => {
         setIsEvaluating(true);
@@ -138,28 +146,35 @@ export default function SummaryEvaluation({
                             </Badge>
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <div className="flex items-center space-x-2">
-                            <Badge
-                                variant={
-                                    evaluationResult.overall.better === "v1"
-                                        ? "default"
-                                        : "secondary"
-                                }
-                                className="text-sm"
-                            >
-                                Summary{" "}
-                                {evaluationResult.overall.better === "v1"
-                                    ? "Version 1"
-                                    : "Version 2"}
-                            </Badge>
-                            <span className="text-sm font-medium">
-                                is better overall
-                            </span>
-                        </div>
-                        <p className="text-sm">
-                            {evaluationResult.overall.reasoning}
-                        </p>
+
+                    <CardContent className="space-y-4">
+                        {Object.entries(evaluationResult).map(
+                            ([criterion, data]) => (
+                                <div key={criterion} className="space-y-1">
+                                    <div className="flex items-center space-x-2">
+                                        <Badge
+                                            variant={
+                                                data.better === "v1"
+                                                    ? "default"
+                                                    : "secondary"
+                                            }
+                                            className="text-sm"
+                                        >
+                                            Summary{" "}
+                                            {data.better === "v1"
+                                                ? "Version 1"
+                                                : "Version 2"}
+                                        </Badge>
+                                        <span className="text-sm font-medium capitalize">
+                                            is better in {criterion}
+                                        </span>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground">
+                                        {data.reasoning}
+                                    </p>
+                                </div>
+                            )
+                        )}
                     </CardContent>
                 </Card>
             )}
