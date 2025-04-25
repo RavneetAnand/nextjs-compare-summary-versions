@@ -13,12 +13,10 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, AlertCircle } from "lucide-react";
+import { EvalData } from "@/data/meetings";
 
 interface SummaryEvaluationProps {
-    summary1: string;
-    summary2: string;
-    transcript: string;
-    notes: string;
+    meeting: EvalData;
 }
 
 interface EvaluationResult {
@@ -32,12 +30,9 @@ interface EvaluationResult {
     };
 }
 
-export default function SummaryEvaluation({
-    summary1,
-    summary2,
-    transcript,
-    notes,
-}: SummaryEvaluationProps) {
+export default function SummaryEvaluation({ meeting }: SummaryEvaluationProps) {
+    const { summary1, summary2, transcript, notes } = meeting;
+
     const [isEvaluating, setIsEvaluating] = useState(false);
     const [evaluationResult, setEvaluationResult] =
         useState<EvaluationResult | null>(null);
@@ -51,7 +46,7 @@ export default function SummaryEvaluation({
 
     useEffect(() => {
         clearEvaluationResult();
-    }, [summary1, summary2, transcript, notes]);
+    }, [meeting]);
 
     const evaluateSummaries = async () => {
         setIsEvaluating(true);

@@ -73,8 +73,6 @@ Format your response as JSON with the following structure:
         response_format: { type: "json_object" },
     });
 
-    console.log("AI Response:", result.choices[0].message.content);
-
     return new Response(result.choices[0].message.content, {
         status: 200,
         headers: {

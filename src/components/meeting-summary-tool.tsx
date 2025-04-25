@@ -67,12 +67,7 @@ export default function MeetingSummaryTool() {
                                 value="evaluation"
                                 className="h-[calc(100%-40px)]"
                             >
-                                <SummaryEvaluation
-                                    summary1={selectedMeeting.summary1}
-                                    summary2={selectedMeeting.summary2}
-                                    transcript={selectedMeeting.transcript}
-                                    notes={selectedMeeting.notes}
-                                />
+                                <SummaryEvaluation meeting={selectedMeeting} />
                             </TabsContent>
 
                             <TabsContent
