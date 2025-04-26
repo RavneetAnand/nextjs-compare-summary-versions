@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-    SidebarInset,
-    SidebarProvider,
-    SidebarRail,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarRail } from "@/components/ui/sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { data as meetingsData } from "@/data/meetings";
 import { MeetingHeader } from "./meeting-header";
