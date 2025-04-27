@@ -45,6 +45,18 @@ export function SummaryComparisonView({ meeting }: SummaryComparisonViewProps) {
         clearEvaluationResult();
     }, [meeting]);
 
+    useEffect(() => {
+        if (error || evaluationResult) {
+            // Scroll to the results section if there is an error
+            if (resultsRef.current) {
+                resultsRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }
+        }
+    }, [error, evaluationResult]);
+
     const evaluateSummaries = async () => {
         setIsEvaluating(true);
         setError(null);
@@ -77,14 +89,6 @@ export function SummaryComparisonView({ meeting }: SummaryComparisonViewProps) {
             );
         } finally {
             setIsEvaluating(false);
-
-            if (resultsRef.current) {
-                // Scroll to the results section
-                resultsRef.current.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                });
-            }
         }
     };
 
